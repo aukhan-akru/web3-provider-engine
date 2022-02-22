@@ -23,13 +23,15 @@ function rpcWrapperEngine (opts) {
   var addresses = [getAddress(privateKey)]
 
   engine.addProvider(new PkHookedWalletSubprovider({
-    // getAccounts: function (cb) {
-    //   cb(null, addresses)
-    // },
-     getAccounts: function () {
-      return addresses
+    getAccounts: function (cb) {
+      console.log("-----dsadsadasdad")
+      cb(null, addresses)
     },
+    //  getAccounts: function () {
+    //   return addresses
+    // },
     getPrivateKey: function (from, cb) {
+
       cb(null, privateKey)
     },
     approveTransaction: function(cb){ },
