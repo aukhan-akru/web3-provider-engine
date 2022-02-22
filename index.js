@@ -13,7 +13,6 @@ function creatEngine() {
         `Error in ProviderEngine: ${err.stack || err.message || err}`
       );
     });
-  
     return new EthQuery(engine);
 }
   
@@ -27,8 +26,8 @@ async function getBal(){
   const balance = await ethQuery.getBalance("0xaE0443175518b16f927eEEfcDAfE0C02D23b2C99", "pending");
   console.log("balance:::", balance.toString());
 
-  let accounts = await ethQuery.getAccounts()
-//   console.log(ethQuery)
+ let a =   await ethQuery.rpc.currentProvider._providers[0].getAccounts()
+console.log("------->",a)
 }
 
 getBal()

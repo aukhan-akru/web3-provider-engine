@@ -2,8 +2,16 @@ const ProviderEngine = require('web3-provider-engine')
 const RpcSubprovider = require('web3-provider-engine/subproviders/rpc.js')
 const PkHookedWalletSubprovider = require('web3-provider-engine/subproviders/hooked-wallet-ethtx.js')
 const NonceSubprovider = require('web3-provider-engine/subproviders/nonce-tracker.js')
+const ethUtil = require('ethereumjs-util')
 
 module.exports = rpcWrapperEngine
+
+
+function getAddress(key){
+  let buffPk = ethUtil.toBuffer(key)
+  const _address = ethUtil.privateToAddress(buffPk)
+  return ethUtil.bufferToHex(_address)
+}
 
 function rpcWrapperEngine (opts) {
   opts = opts || {}
@@ -12,15 +20,20 @@ function rpcWrapperEngine (opts) {
 
   // tx signing
   var privateKey = opts.privateKey
-  var addresses = [opts.addressHex]
+  var addresses = [getAddress(privateKey)]
 
   engine.addProvider(new PkHookedWalletSubprovider({
-    getAccounts: function (cb) {
-      cb(null, addresses)
+    // getAccounts: function (cb) {
+    //   cb(null, addresses)
+    // },
+     getAccounts: function () {
+      return addresses
     },
     getPrivateKey: function (from, cb) {
       cb(null, privateKey)
-    }
+    },
+    approveTransaction: function(cb){ },
+    signTransaction: function(cb){  }
   }))
 
   // pending nonce
