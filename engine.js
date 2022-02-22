@@ -24,7 +24,7 @@ function rpcWrapperEngine (opts) {
 
   engine.addProvider(new PkHookedWalletSubprovider({
     getAccounts: function (cb) {
-      console.log("-----dsadsadasdad")
+
       cb(null, addresses)
     },
     approveTransaction: function(cb){ },
