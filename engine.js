@@ -27,13 +27,6 @@ function rpcWrapperEngine (opts) {
       console.log("-----dsadsadasdad")
       cb(null, addresses)
     },
-    //  getAccounts: function () {
-    //   return addresses
-    // },
-    getPrivateKey: function (from, cb) {
-
-      cb(null, privateKey)
-    },
     approveTransaction: function(cb){ },
     signTransaction: function(cb){  }
   }))
